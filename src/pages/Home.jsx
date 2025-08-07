@@ -113,7 +113,7 @@ const Home = () => {
                   Premium Quality <span className="text-orange-600">Bricks</span> for Your Construction Needs
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed">
-                  Caliber Infra specializes in manufacturing high-quality cement bricks, flyash bricks, and paver blocks. 
+                  Caliber Enterprises specializes in manufacturing high-quality cement bricks, flyash bricks, and paver blocks. 
                   With our state-of-the-art manufacturing facility, we deliver excellence in every brick.
                 </p>
               </div>
@@ -172,11 +172,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Caliber Infra Section */}
+      {/* Why Choose Caliber Enterprises Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl font-bold text-gray-900">Why Choose Caliber Infra?</h2>
+            <h2 className="text-4xl font-bold text-gray-900">Why Choose Caliber Enterprises?</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               We combine traditional craftsmanship with modern technology to deliver 
               the finest quality bricks for all your construction needs.
@@ -185,8 +185,8 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="bg-gray-50 p-8 rounded-2xl text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+              <div key={index} className={`p-8 rounded-2xl text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105 ${index % 2 === 0 ? 'bg-orange-100' : 'bg-orange-50'}`}>
+                <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-orange-200">
                   <feature.icon className="h-8 w-8 text-orange-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>

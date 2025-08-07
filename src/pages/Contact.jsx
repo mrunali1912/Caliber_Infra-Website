@@ -26,7 +26,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
@@ -41,7 +41,7 @@ const Contact = () => {
         quantity: '',
         message: ''
       });
-      
+
       setTimeout(() => setSubmitStatus('idle'), 5000);
     }, 2000);
   };
@@ -78,9 +78,9 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <h1 className="text-4xl font-bold text-gray-900">Contact Caliber Infra</h1>
+          <h1 className="text-4xl font-bold text-gray-900">Contact Caliber Enterprises</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to start your project? Get in touch with our team for expert guidance, 
+            Ready to start your project? Get in touch with our team for expert guidance,
             custom quotes, and premium quality bricks delivered on time.
           </p>
         </div>
@@ -93,7 +93,7 @@ const Contact = () => {
                 <Building2 className="h-8 w-8 text-orange-600" />
                 <h2 className="text-2xl font-bold text-gray-900">Get In Touch</h2>
               </div>
-              
+
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="space-y-3">
@@ -115,19 +115,19 @@ const Contact = () => {
             </div>
 
             {/* CEO Contact */}
-            <div className="bg-orange-600 rounded-2xl p-8 text-white">
-              <div className="flex items-center space-x-3 mb-4">
+            <div className="bg-orange-600 rounded-2xl p-4 text-white">
+              <div className="flex items-center space-x-3 mb-0 pl-2">
                 <User className="h-8 w-8" />
                 <div>
                   <h3 className="text-xl font-bold">Gaurav Giri</h3>
                   <p className="text-orange-100">Founder & CEO</p>
                 </div>
               </div>
-              <p className="text-orange-100 mb-4">
-                Have a large project or special requirements? Connect directly with our CEO 
+              <p className="text-orange-100 mb-0 pl-4">
+                Have a large project or special requirements? Connect directly with our CEO
                 for personalized service and custom solutions.
               </p>
-              <div className="space-y-2">
+              <div className="space-y-1 pl-4">
                 <p className="font-semibold">Direct Line: +91 99999 88888</p>
                 <p className="font-semibold">Email: gaurav@gauravinfra.com</p>
               </div>
@@ -136,7 +136,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl p-8">
+            <div className="bg-white rounded-2xl p-12">
               <div className="flex items-center space-x-3 mb-8">
                 <MessageSquare className="h-8 w-8 text-orange-600" />
                 <h2 className="text-2xl font-bold text-gray-900">Request a Quote</h2>
@@ -163,6 +163,8 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
+                      onInvalid={(e) => e.target.setCustomValidity('Enter Your Name')}
+                      onInput={(e) => e.target.setCustomValidity('')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                       placeholder="Your full name"
                     />
@@ -179,6 +181,8 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
+                      onInvalid={(e) => e.target.setCustomValidity('Enter Your Email')}
+                      onInput={(e) => e.target.setCustomValidity('')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                       placeholder="your@email.com"
                     />
@@ -195,6 +199,8 @@ const Contact = () => {
                       required
                       value={formData.phone}
                       onChange={handleChange}
+                      onInvalid={(e) => e.target.setCustomValidity('Enter Your Phone Number')}
+                      onInput={(e) => e.target.setCustomValidity('')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                       placeholder="+91 98765 43210"
                     />
@@ -210,6 +216,8 @@ const Contact = () => {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
+                      onInvalid={(e) => e.target.setCustomValidity('Enter Your Company Name')}
+                      onInput={(e) => e.target.setCustomValidity('')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                       placeholder="Your company name"
                     />
@@ -224,6 +232,8 @@ const Contact = () => {
                       name="projectType"
                       value={formData.projectType}
                       onChange={handleChange}
+                      onInvalid={(e) => e.target.setCustomValidity('Enter Your Company Name')}
+                      onInput={(e) => e.target.setCustomValidity('')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                     >
                       <option value="">Select project type</option>
@@ -244,6 +254,8 @@ const Contact = () => {
                       name="brickType"
                       value={formData.brickType}
                       onChange={handleChange}
+                      onInvalid={(e) => e.target.setCustomValidity('Enter Your Brick Type')}
+                      onInput={(e) => e.target.setCustomValidity('')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                     >
                       <option value="">Select brick type</option>
@@ -268,6 +280,8 @@ const Contact = () => {
                     name="quantity"
                     value={formData.quantity}
                     onChange={handleChange}
+                    onInvalid={(e) => e.target.setCustomValidity('Enter Your Quantity')}
+                    onInput={(e) => e.target.setCustomValidity('')}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
                     placeholder="e.g., 10,000 pieces or 500 sq ft"
                   />
@@ -283,6 +297,8 @@ const Contact = () => {
                     rows={6}
                     value={formData.message}
                     onChange={handleChange}
+                    onInvalid={(e) => e.target.setCustomValidity('Enter Your Project Details &')}
+                    onInput={(e) => e.target.setCustomValidity('')}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors resize-none"
                     placeholder="Please provide details about your project, timeline, delivery location, and any specific requirements..."
                   ></textarea>

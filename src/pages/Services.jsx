@@ -4,6 +4,8 @@ import { ShoppingCart, Info, Package } from 'lucide-react';
 const Services = () => {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
+  const [addedMessage, setAddedMessage] = useState('');
+  const [quantities, setQuantities] = useState({});
 
   const products = [
     {
@@ -99,11 +101,20 @@ const Services = () => {
   ];
 
   const addToCart = (product) => {
-    setCart([...cart, { ...product, quantity: 1, cartId: Date.now() }]);
+    const quantity = quantities[product.id] ? parseInt(quantities[product.id], 10) : 1;
+    if (quantity < 1 || isNaN(quantity)) return;
+    setCart([...cart, { ...product, quantity, cartId: Date.now() }]);
+    setAddedMessage(`${product.name} (${quantity}) added to cart!`);
+    setTimeout(() => setAddedMessage(''), 2000);
+    setQuantities({ ...quantities, [product.id]: 1 });
   };
 
   const removeFromCart = (cartId) => {
     setCart(cart.filter(item => item.cartId !== cartId));
+  };
+
+  const updateCartQuantity = (cartId, newQuantity) => {
+    setCart(cart.map(item => item.cartId === cartId ? { ...item, quantity: newQuantity } : item));
   };
 
   const getTotalPrice = () => {
@@ -128,6 +139,15 @@ const Services = () => {
             All products are manufactured at our state-of-the-art 5-acre facility.
           </p>
         </div>
+
+        {/* Add to Cart Message */}
+        {addedMessage && (
+          <div className="mb-6 flex justify-center">
+            <div className="bg-green-100 text-green-800 px-6 py-3 rounded shadow font-medium animate-fade-in">
+              {addedMessage}
+            </div>
+          </div>
+        )}
 
         {/* Category Filter & Cart */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-8 space-y-4 sm:space-y-0">
@@ -180,6 +200,16 @@ const Services = () => {
                         <div className="flex-1">
                           <h4 className="font-medium">{item.name}</h4>
                           <p className="text-sm text-gray-600">₹{item.price} {item.unit}</p>
+                          <div className="flex items-center mt-2">
+                            <span className="mr-2 text-sm">Qty:</span>
+                            <input
+                              type="number"
+                              min="1"
+                              value={item.quantity}
+                              onChange={e => updateCartQuantity(item.cartId, Math.max(1, parseInt(e.target.value) || 1))}
+                              className="w-16 px-2 py-1 border border-gray-300 rounded text-sm"
+                            />
+                          </div>
                         </div>
                         <button
                           onClick={() => removeFromCart(item.cartId)}
@@ -221,7 +251,6 @@ const Services = () => {
                   }}
                 />
               </div>
-              
               <div className="p-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -231,12 +260,10 @@ const Services = () => {
                     ₹{product.price} {product.unit}
                   </span>
                 </div>
-
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{product.description}</p>
                 </div>
-
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
                     <Info className="h-4 w-4 text-orange-600" />
@@ -248,10 +275,21 @@ const Services = () => {
                     <div>Dimensions: {product.specifications.dimensions}</div>
                   </div>
                 </div>
-
+                {/* Quantity Input */}
+                <div className="flex items-center space-x-2 mt-2">
+                  <label htmlFor={`qty-${product.id}`} className="text-sm font-medium">Qty:</label>
+                  <input
+                    id={`qty-${product.id}`}
+                    type="number"
+                    min="1"
+                    value={quantities[product.id] || 0}
+                    onChange={e => setQuantities({ ...quantities, [product.id]: e.target.value })}
+                    className="w-16 px-2 py-1 border border-gray-300 rounded text-sm"
+                  />
+                </div>
                 <button
                   onClick={() => addToCart(product)}
-                  className="w-full bg-orange-600 text-white py-3 rounded-lg font-medium hover:bg-orange-700 transition-colors flex items-center justify-center space-x-2"
+                  className="w-full bg-orange-600 text-white py-3 rounded-lg font-medium hover:bg-orange-700 transition-colors flex items-center justify-center space-x-2 mt-2"
                 >
                   <Package className="h-5 w-5" />
                   <span>Add to Cart</span>
