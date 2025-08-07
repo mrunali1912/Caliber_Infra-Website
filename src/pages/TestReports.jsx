@@ -9,6 +9,7 @@ const TestReports = () => {
     category: 'quality',
     file: null
   });
+  const [imageModal, setImageModal] = useState({ open: false, src: '', title: '', type: '' });
 
   const categories = [
     { id: 'all', name: 'All Reports' },
@@ -26,7 +27,8 @@ const TestReports = () => {
       date: '2024-01-15',
       type: 'PDF',
       size: '2.3 MB',
-      description: 'Comprehensive compressive strength analysis of cement bricks batch CB-2024-001'
+      description: 'Comprehensive compressive strength analysis of cement bricks batch CB-2024-001',
+      file: '/test-reports/strength-test.pdf'
     },
     {
       id: 2,
@@ -35,7 +37,8 @@ const TestReports = () => {
       date: '2024-01-10',
       type: 'PDF',
       size: '1.8 MB',
-      description: 'Official ISO certification for quality management systems'
+      description: 'Official ISO certification for quality management systems',
+      file: '/test-reports/iso-certificate.pdf'
     },
     {
       id: 3,
@@ -44,7 +47,8 @@ const TestReports = () => {
       date: '2024-01-08',
       type: 'DOCX',
       size: '1.5 MB',
-      description: 'Water absorption rate testing for flyash bricks production batch FB-2024-003'
+      description: 'Water absorption rate testing for flyash bricks production batch FB-2024-003',
+      file: '/test-reports/flyash-absorption.docx'
     },
     {
       id: 4,
@@ -53,7 +57,8 @@ const TestReports = () => {
       date: '2024-01-05',
       type: 'PDF',
       size: '4.2 MB',
-      description: 'Environmental compliance and impact assessment for manufacturing facility'
+      description: 'Environmental compliance and impact assessment for manufacturing facility',
+      file: '/test-reports/environmental-impact.pdf'
     },
     {
       id: 5,
@@ -62,7 +67,8 @@ const TestReports = () => {
       date: '2024-01-03',
       type: 'PDF',
       size: '3.1 MB',
-      description: 'Durability and wear resistance testing for interlocking paver blocks'
+      description: 'Durability and wear resistance testing for interlocking paver blocks',
+      file: '/test-reports/paver-durability.pdf'
     },
     {
       id: 6,
@@ -71,7 +77,8 @@ const TestReports = () => {
       date: '2024-01-01',
       type: 'JPG',
       size: '0.8 MB',
-      description: 'Workplace safety and occupational health compliance certificate'
+      description: 'Workplace safety and occupational health compliance certificate',
+      file: '/test-reports/safety-certificate.jpg'
     }
   ];
 
@@ -108,8 +115,28 @@ const TestReports = () => {
     }
   };
 
+  const handleView = (report) => {
+    const type = report.type.toLowerCase();
+    if (["jpg", "jpeg", "png"].includes(type)) {
+      setImageModal({ open: true, src: report.file, title: report.title, type: 'image' });
+    } else if (type === 'pdf') {
+      setImageModal({ open: true, src: report.file, title: report.title, type: 'pdf' });
+    } else if (type === 'docx') {
+      setImageModal({ open: true, src: report.file, title: report.title, type: 'docx' });
+    }
+  };
+
+  const handleDownload = (report) => {
+    const link = document.createElement('a');
+    link.href = report.file;
+    link.download = report.file.split('/').pop();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       {/* Hero Section (visually appealing) */}
       <section
         className="relative h-[220px] md:h-[300px] flex items-center justify-center bg-center bg-cover"
@@ -195,11 +222,17 @@ const TestReports = () => {
                 </div>
                 
                 <div className="flex space-x-2">
-                  <button className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
+                  <button
+                    className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center justify-center"
+                    onClick={() => handleDownload(report)}
+                  >
                     <Download className="mr-1 h-4 w-4" />
                     Download
                   </button>
-                  <button className="px-4 py-2 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                  <button
+                    className="px-4 py-2 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                    onClick={() => handleView(report)}
+                  >
                     View
                   </button>
                 </div>
@@ -328,6 +361,43 @@ const TestReports = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* File Modal (Image, PDF, DOCX) */}
+      {imageModal.open && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-2xl w-full relative shadow-2xl min-h-[300px] flex flex-col">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={() => setImageModal({ open: false, src: '', title: '', type: '' })}
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{imageModal.title}</h3>
+            {imageModal.type === 'image' && (
+              <img src={imageModal.src} alt={imageModal.title} className="w-full rounded shadow" />
+            )}
+            {imageModal.type === 'pdf' && (
+              <iframe
+                src={imageModal.src}
+                title={imageModal.title}
+                className="w-full h-[60vh] rounded border"
+                frameBorder="0"
+              />
+            )}
+            {imageModal.type === 'docx' && (
+              <div className="flex flex-col items-center justify-center h-40 text-gray-700">
+                <p className="mb-2">Preview not available for Word documents.</p>
+                <a
+                  href={imageModal.src}
+                  download
+                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                >
+                  Download File
+                </a>
+              </div>
+            )}
           </div>
         </div>
       )}

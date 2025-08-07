@@ -1,9 +1,9 @@
 import React from 'react';
-import { User, Building2, Award, Target, Users, Leaf } from 'lucide-react';
+import { User, Building2, Award, Target, Users, Leaf, CheckCircle } from 'lucide-react';
 
 const About = () => {
   const milestones = [
-    { year: '2018', event: 'Company Founded', description: 'Gaurav Giri established Caliber Infra with a vision to provide quality construction materials.' },
+    { year: '2018', event: 'Company Founded', description: 'Gaurav Giri established Caliber Enterprises with a vision to provide quality construction materials.' },
     { year: '2019', event: 'Manufacturing Plant', description: 'Set up our state-of-the-art 5-acre manufacturing facility with modern equipment.' },
     { year: '2020', event: 'Product Diversification', description: 'Expanded our product line to include flyash bricks and paver blocks.' },
     { year: '2021', event: 'Quality Certification', description: 'Achieved ISO certification for quality management systems.' },
@@ -25,7 +25,7 @@ const About = () => {
     {
       icon: Users,
       title: 'Customer Satisfaction',
-      description: 'We prioritize our customers\' needs and work tirelessly to exceed their expectations in every project.'
+      description: "We prioritize our customers' needs and work tirelessly to exceed their expectations in every project."
     },
     {
       icon: Target,
@@ -34,12 +34,21 @@ const About = () => {
     }
   ];
 
+  const achievements = [
+    'Successfully completed 500+ projects',
+    'ISO 9001:2015 Certified Facility',
+    'Serving over 20 cities across India',
+    '3 Product Categories: Flyash Bricks, Paver Blocks, and Concrete Blocks',
+    '10,000+ Bricks Manufactured Daily',
+    'Awarded Best SME in Construction Materials 2023'
+  ];
+
   return (
     <div className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <h1 className="text-4xl font-bold text-gray-900">About Caliber Infra</h1>
+          <h1 className="text-4xl font-bold text-gray-900">About Caliber Enterprises</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Building the future with quality, innovation, and sustainable practices. 
             Learn about our journey, leadership, and commitment to excellence.
@@ -59,11 +68,11 @@ const About = () => {
                   <p className="text-xl text-orange-600 font-semibold">Founder & CEO</p>
                 </div>
               </div>
-              
+
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
                   With a vision to revolutionize the construction materials industry, Gaurav Giri founded 
-                  Caliber Infra with the mission of providing high-quality, sustainable building materials 
+                  Caliber Enterprises with the mission of providing high-quality, sustainable building materials 
                   to construction professionals across the region.
                 </p>
                 <p>
@@ -73,7 +82,7 @@ const About = () => {
                 </p>
                 <p>
                   Gaurav's commitment to innovation, quality, and environmental sustainability has positioned 
-                  Caliber Infra as a trusted partner for construction projects of all sizes, from residential 
+                  Caliber Enterprises as a trusted partner for construction projects of all sizes, from residential 
                   homes to large commercial developments.
                 </p>
               </div>
@@ -110,7 +119,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Company Overview */}
+        {/* Manufacturing Section */}
         <section className="bg-white rounded-2xl p-8 mb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -185,33 +194,70 @@ const About = () => {
           </div>
         </section>
 
-        {/* Company Timeline */}
-        <section className="bg-white rounded-2xl p-8">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">Our Journey</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Key milestones in our growth and evolution as a leading brick manufacturer.
-            </p>
-          </div>
-
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-orange-200"></div>
-            <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
-                    <div className="bg-orange-50 p-6 rounded-lg">
-                      <div className="text-orange-600 font-bold text-lg mb-2">{milestone.year}</div>
-                      <h3 className="font-bold text-gray-900 mb-2">{milestone.event}</h3>
-                      <p className="text-gray-600 text-sm">{milestone.description}</p>
-                    </div>
-                  </div>
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-orange-600 rounded-full border-4 border-white"></div>
+        {/* Achievements */}
+        <section className="py-16 bg-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Our Achievements</h2>
+              <p className="text-lg text-gray-600">
+                Milestones that reflect our commitment to excellence
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {achievements.map((achievement, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md flex items-center">
+                  <CheckCircle className="h-6 w-6 text-green-500 mr-3" />
+                  <span className="text-gray-700">{achievement}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+        {/* Team Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Leadership Team</h2>
+              <p className="text-lg text-gray-600">
+                Experienced professionals driving our success
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <img 
+                  src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg" 
+                  alt="CEO"
+                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+                />
+                <h3 className="text-xl font-semibold text-gray-900">Gaurav Giri</h3>
+                <p className="text-blue-600">Founder & CEO</p>
+                <p className="text-gray-600 mt-2">Visionary leader with 15+ years in construction industry</p>
+              </div>
+              <div className="text-center">
+                <img 
+                  src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg" 
+                  alt="COO"
+                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+                />
+                <h3 className="text-xl font-semibold text-gray-900">Rajesh Kumar</h3>
+                <p className="text-blue-600">Chief Operations Officer</p>
+                <p className="text-gray-600 mt-2">Manufacturing expert ensuring quality and efficiency</p>
+              </div>
+              <div className="text-center">
+                <img 
+                  src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg" 
+                  alt="CTO"
+                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+                />
+                <h3 className="text-xl font-semibold text-gray-900">Priya Sharma</h3>
+                <p className="text-blue-600">Head of Quality Control</p>
+                <p className="text-gray-600 mt-2">Quality assurance specialist with technical expertise</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   );
