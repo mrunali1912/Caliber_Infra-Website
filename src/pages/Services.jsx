@@ -7,6 +7,17 @@ const Services = () => {
   const [addedMessage, setAddedMessage] = useState('');
   const [quantities, setQuantities] = useState({});
 
+  const [showImagePopup, setShowImagePopup] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+ 
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+
+
+
+
   const products = [
     {
       id: 1,
@@ -21,7 +32,11 @@ const Services = () => {
         waterAbsorption: '< 15%',
         dimensions: '190 x 90 x 90 mm'
       },
-      image: '/4-inch-cement-brick.jpg'
+      images: ['/4-inch-cement-brick.jpg',
+        '/4inch-concrete1.png',
+        '/4-inch-cement-brick.jpg',
+        '/4-inch-cement-brick.jpg'
+      ]
     },
     {
       id: 2,
@@ -36,7 +51,12 @@ const Services = () => {
         waterAbsorption: '< 15%',
         dimensions: '190 x 90 x 140 mm'
       },
-      image: '/6-inch-cement-brick.webp'
+      images: [
+        '/6-inch-cement-brick1.png',
+        '/6-inch-cement-brick2.png',
+        '/6-inch-cement-brick3.png',
+        '/6-inch-cement-brick4.png',
+      ],
     },
     {
       id: 3,
@@ -51,7 +71,13 @@ const Services = () => {
         waterAbsorption: '< 15%',
         dimensions: '190 x 90 x 190 mm'
       },
-      image: '/cement-brick-9-inch.webp'
+      images: [
+        '/cement-brick-9-inch.webp',
+        '/cement-brick-9-inch.webp',
+        '/cement-brick-9-inch.webp',
+        '/cement-brick-9-inch.webp',
+      ]
+
     },
     {
       id: 4,
@@ -66,7 +92,13 @@ const Services = () => {
         waterAbsorption: '< 12%',
         dimensions: '190 x 90 x 90 mm'
       },
-      image: '/fly-ash_brick.jpg'
+      images: [
+        '/fly-ash_brick.jpg',
+        '/fly-ash_brick.jpg',
+        '/fly-ash_brick.jpg',
+        '/fly-ash_brick.jpg'
+      ]
+
     },
     {
       id: 5,
@@ -81,7 +113,13 @@ const Services = () => {
         waterAbsorption: '< 12%',
         dimensions: '190 x 90 x 140 mm'
       },
-      image: '/6-inch-fly-ash-bricks.webp'
+      images: [
+        '/6-inch-fly-ash-bricks.webp',
+        '/6-inch-fly-ash-bricks.webp',
+        '/6-inch-fly-ash-bricks.webp',
+        '/6-inch-fly-ash-bricks.webp'
+      ]
+
     },
     {
       id: 6,
@@ -96,13 +134,22 @@ const Services = () => {
         waterAbsorption: '< 6%',
         dimensions: 'Multiple sizes available'
       },
-      image: '/paver-blocks.webp'
+      images: [
+        '/paver-blocks.webp',
+        '/paver-block1.jpg',
+        '/paver-block2.webp',
+        '/paver-block3.webp'
+      ]
+
     }
   ];
 
   const addToCart = (product) => {
     const quantity = quantities[product.id] ? parseInt(quantities[product.id], 10) : 1;
     if (quantity < 1 || isNaN(quantity)) return;
+    setCart([...cart, { ...product, quantity, cartId: Date.now() }]);
+    setAddedMessage(`${product.name} (${quantity}) added to cart!`);
+    setShowCart(true);
     setCart([...cart, { ...product, quantity, cartId: Date.now() }]);
     setAddedMessage(`${product.name} (${quantity}) added to cart!`);
     setTimeout(() => setAddedMessage(''), 2000);
@@ -124,8 +171,8 @@ const Services = () => {
   const categories = ['All', 'Cement Bricks', 'Flyash Bricks', 'Paver Blocks'];
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const filteredProducts = selectedCategory === 'All' 
-    ? products 
+  const filteredProducts = selectedCategory === 'All'
+    ? products
     : products.filter(product => product.category === selectedCategory);
 
   return (
@@ -135,7 +182,7 @@ const Services = () => {
         <div className="text-center space-y-4 mb-12">
           <h1 className="text-4xl font-bold text-gray-900">Our Products & Services</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our comprehensive range of premium quality bricks and paver blocks. 
+            Explore our comprehensive range of premium quality bricks and paver blocks.
             All products are manufactured at our state-of-the-art 5-acre facility.
           </p>
         </div>
@@ -156,11 +203,10 @@ const Services = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  selectedCategory === category
-                    ? 'bg-orange-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-orange-50 hover:text-orange-600'
-                }`}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedCategory === category
+                  ? 'bg-orange-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-orange-50 hover:text-orange-600'
+                  }`}
               >
                 {category}
               </button>
@@ -238,12 +284,18 @@ const Services = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div key={product.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <div className="h-64 overflow-hidden bg-gray-100">
                 <img
-                  src={product.image}
+                  src={product.images ? product.images[0] : product.image}
                   alt={product.name}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  onClick={() => {
+                    setSelectedProduct(product);
+                    setSelectedImageIndex(0);
+                    setShowImagePopup(true);
+                  }}
+
                   onError={(e) => {
                     const target = e.target;
                     target.style.display = 'none';
@@ -298,6 +350,46 @@ const Services = () => {
             </div>
           ))}
         </div>
+
+        {showImagePopup && selectedProduct && (
+          <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+            <div className="bg-white p-6 rounded-lg relative max-w-lg w-full">
+              <button
+                onClick={() => setShowImagePopup(false)}
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+              >
+                ✕
+              </button>
+
+              {/* Main selected image */}
+              <div className="mb-4">
+                <img
+                  src={selectedProduct.images[selectedImageIndex]}
+                  alt={`${selectedProduct.name} view ${selectedImageIndex + 1}`}
+                  className="w-full h-64 object-contain rounded"
+                />
+              </div>
+
+              {/* Thumbnail images for switching */}
+              <div className="flex justify-center gap-2">
+                {selectedProduct.images.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`Thumbnail ${idx + 1}`}
+                    className={`w-16 h-16 object-cover rounded cursor-pointer border-2 ${idx === selectedImageIndex ? 'border-orange-600' : 'border-transparent'}`}
+                    onClick={() => setSelectedImageIndex(idx)}
+                  />
+                ))}
+              </div>
+
+              <h3 className="text-lg font-bold mt-6">{selectedProduct.name}</h3>
+              <p className="text-sm text-gray-600">{selectedProduct.description}</p>
+            </div>
+          </div>
+        )}
+
+
 
         {/* Services Section */}
         <div className="mt-20 bg-white rounded-2xl p-8">

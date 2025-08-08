@@ -124,7 +124,8 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/1117452/pexels-photo-1117452.jpeg"
+                // src="https://images.pexels.com/photos/1117452/pexels-photo-1117452.jpeg"
+                src="gallary-5-acre-manufacturing-plant.jpg"
                 alt="Manufacturing Facility"
                 className="rounded-2xl shadow-2xl"
               />

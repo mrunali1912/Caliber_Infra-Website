@@ -14,48 +14,56 @@ const Gallery = () => {
     { id: 'team', name: 'Our Team' },
     { id: 'projects', name: 'Completed Projects' }
   ];
+    
+
 
   const galleryImages = [
     {
       id: 1,
       category: 'facility',
       title: '5-Acre Manufacturing Facility Overview',
-      image: 'https://images.pexels.com/photos/1647962/pexels-photo-1647962.jpeg',
+      image: 'gallary-5-acre-manufacturing-plant.jpg',
+      // image: 'https://images.pexels.com/photos/1647962/pexels-photo-1647962.jpeg',
       description: 'Aerial view of our state-of-the-art manufacturing facility'
     },
     {
       id: 2,
       category: 'machinery',
       title: 'Automated Brick Making Machine',
-      image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg',
+       image: 'gallary-automated-brick-making-machine.jpg',
+      // image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg',
       description: 'High-capacity automated brick production line'
     },
     {
       id: 3,
       category: 'products',
       title: 'Premium Cement Bricks',
-      image: 'https://images.pexels.com/photos/162539/architecture-block-building-business-162539.jpeg',
+      image: 'brick.jpg',
+      // image: 'https://images.pexels.com/photos/162539/architecture-block-building-business-162539.jpeg',
       description: 'Finished cement bricks ready for dispatch'
     },
     {
       id: 4,
       category: 'raw-materials',
       title: 'Raw Material Storage Area',
-      image: 'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg',
+       image: 'gallary-raw-material-storage-area.webp',
+      // image: 'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg',
       description: 'Organized storage of cement, sand, and aggregates'
     },
     {
       id: 5,
       category: 'machinery',
       title: 'Quality Control Laboratory',
-      image: 'https://images.pexels.com/photos/3735780/pexels-photo-3735780.jpeg',
+       image: 'gallary-qulality-control-laboratory1.jpg',
+      // image: 'https://images.pexels.com/photos/3735780/pexels-photo-3735780.jpeg',
       description: 'Modern testing equipment for quality assurance'
     },
     {
       id: 6,
       category: 'products',
       title: 'Colorful Paver Blocks Display',
-      image: 'https://images.pexels.com/photos/1560932/pexels-photo-1560932.jpeg',
+      image: 'gallary-Paver-Block.jpg',
+      // image: 'https://images.pexels.com/photos/1560932/pexels-photo-1560932.jpeg',
       description: 'Various patterns and colors of paver blocks'
     },
     {
@@ -69,35 +77,40 @@ const Gallery = () => {
       id: 8,
       category: 'facility',
       title: 'Curing Yard',
-      image: 'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg',
+      image: 'gallary-curing-yard-2.webp',
+      // image: 'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg',
       description: 'Systematic curing process for optimal strength development'
     },
     {
       id: 9,
       category: 'projects',
       title: 'Residential Project - Brick Installation',
-      image: 'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg',
+      image: 'gallary-residential2.webp',
+      // image: 'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg',
       description: 'Our bricks being used in a premium residential project'
     },
     {
       id: 10,
       category: 'raw-materials',
       title: 'Quality Raw Materials',
-      image: 'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg',
+       image: 'gallary-grey-sand.webp',
+      // image: 'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg',
       description: 'Premium grade cement and aggregates in storage'
     },
     {
       id: 11,
       category: 'machinery',
       title: 'Conveyor System',
-      image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg',
+       image: 'gallay-conveyor-system.png',
+      // image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg',
       description: 'Automated material handling and transportation system'
     },
     {
       id: 12,
       category: 'products',
       title: 'Flyash Bricks Stack',
-      image: 'https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg',
+      image: 'gallary-fly-ash-brick.webp',
+      // image: 'https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg',
       description: 'Eco-friendly flyash bricks ready for delivery'
     }
   ];
@@ -110,7 +123,7 @@ const Gallery = () => {
     <div className="min-h-screen">
       {/* Hero Section (with construction building image) */}
       <section
-        className="relative h-[350px] md:h-[450px] flex items-center justify-center bg-center bg-cover"
+        className="relative h-[250px] md:h-[300px] flex items-center justify-center bg-center bg-cover"
         style={{
           backgroundImage:
             'url(https://images.pexels.com/photos/209251/pexels-photo-209251.jpeg)',

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Custom animations for hero section */
 @keyframes blob {
   0% {
