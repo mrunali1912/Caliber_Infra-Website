@@ -221,7 +221,8 @@ const Careers = () => {
       {/* Application Form Modal */}
       {showApplicationForm && selectedJob && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
-          <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 my-8">
+          <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 my-8"
+            style={{ maxHeight: '100vh', overflowY: 'auto' }}>
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-bold text-gray-900">Apply for {selectedJob.title}</h3>
               <button 
@@ -250,6 +251,7 @@ const Careers = () => {
                   <input
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    onInvalid={(e) => e.target.setCustomValidity('Enter Your First Name')}
                     required
                   />
                 </div>
@@ -260,6 +262,7 @@ const Careers = () => {
                   <input
                     type="text"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    onInvalid={(e) => e.target.setCustomValidity('Enter Your Last Name')}
                     required
                   />
                 </div>
@@ -272,6 +275,7 @@ const Careers = () => {
                   <input
                     type="email"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    onInvalid={(e) => e.target.setCustomValidity('Enter Your Email')}
                     required
                   />
                 </div>
@@ -282,6 +286,7 @@ const Careers = () => {
                   <input
                     type="tel"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    onInvalid={(e) => e.target.setCustomValidity('Enter Your Phone Number')}
                     required
                   />
                 </div>
@@ -293,6 +298,7 @@ const Careers = () => {
                 <textarea
                   rows={2}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  onInvalid={(e) => e.target.setCustomValidity('Enter Your Current Address')}
                   required
                 ></textarea>
               </div>
@@ -338,6 +344,7 @@ const Careers = () => {
                   type="file"
                   accept=".pdf,.doc,.docx"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  onInvalid={(e) => e.target.setCustomValidity('Upload Your Resume/CV')}
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
