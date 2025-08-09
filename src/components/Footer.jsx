@@ -5,7 +5,8 @@ import { Building2, Phone, Mail, MapPin, Clock } from 'lucide-react';
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="max-w-full mx-auto px-2 sm:px-4 lg:px-8 py-12">
+      <div className="max-w-full mx-auto px-2 sm:px-4 lg:px-8 pt-12 pb-8
+">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8">
           {/* Company Info */}
           <div className="space-y-4 ml-8">
@@ -25,7 +26,7 @@ const Footer = () => {
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-orange-400 transition-colors">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557a9.93 9.93 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195A4.92 4.92 0 0 0 16.616 3c-2.73 0-4.942 2.21-4.942 4.932 0 .386.045.762.127 1.124C7.728 8.807 4.1 6.884 1.671 3.965c-.423.722-.666 1.561-.666 2.475 0 1.708.87 3.216 2.188 4.099a4.904 4.904 0 0 1-2.239-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.209c9.057 0 14.009-7.496 14.009-13.986 0-.213-.005-.425-.014-.636A9.936 9.936 0 0 0 24 4.557z" /></svg>
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-pink-500 transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-orange-500 transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <path d="M16 11.37a4 4 0 1 1-7.94 1.63 4 4 0 0 1 7.94-1.63z" />
@@ -91,7 +92,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-orange-500" />
-                <span>info@caliberinfra.com</span>
+                <span  className="truncate sm:whitespace-normal sm:break-words">info@caliberinfra.com</span>
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-orange-500 mt-0.5" />
@@ -111,10 +112,10 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <p className="mb-2 md:mb-0">
+            <p className="mb-2 md:mb-0 text-center md:text-left">
               © {new Date().getFullYear()} Caliber Enterprises. All rights reserved.
             </p>
-            <p>
+            <p className="text-center md:text-right">
               Designed and Developed by
               <a
                 href="https://rsinfotechsys.com/"
