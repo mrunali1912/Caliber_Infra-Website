@@ -237,7 +237,7 @@ const About = () => {
               </div>
               <div className="text-center">
                 <img 
-                  src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg" 
+                  src="aboutUs-testimonial3.avif" 
                   alt="COO"
                   className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                 />
@@ -247,7 +247,7 @@ const About = () => {
               </div>
               <div className="text-center">
                 <img 
-                  src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg" 
+                  src="aboutUs-testimonial4.png" 
                   alt="CTO"
                   className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                 />
