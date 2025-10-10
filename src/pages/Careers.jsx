@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Clock, DollarSign, Users, ArrowRight, X } from 'lucide-react';
+import { MapPin, Clock, IndianRupee , Users, ArrowRight, X } from 'lucide-react';
 
 const Careers = () => {
   const [showApplicationForm, setShowApplicationForm] = useState(false);
@@ -77,7 +77,33 @@ const Careers = () => {
         'Strong leadership and problem-solving skills',
         'Computer proficiency in relevant software'
       ]
-    }
+    },
+  {
+  id: 4,
+  title: 'Accountant',
+  department: 'Finance & Accounts',
+  location: 'Head Office',
+  type: 'Full-time',
+  experience: '2-5 years',
+  salary: '₹25,000 - ₹40,000',
+  description: 'Manage financial records, prepare reports, and ensure compliance with accounting standards and company policies.',
+  responsibilities: [
+    'Maintain and update financial records and ledgers',
+    'Prepare monthly, quarterly, and annual financial statements',
+    'Manage accounts payable and receivable',
+    'Reconcile bank statements and handle cash flow management',
+    'Assist in budgeting, audits, and financial planning',
+    'Ensure compliance with tax regulations and statutory requirements'
+  ],
+  requirements: [
+    'Bachelor’s degree in Accounting, Finance, or related field',
+    'Proven experience as an Accountant or in a similar role',
+    'Knowledge of Tally ERP, MS Excel, and accounting principles',
+    'Strong analytical and problem-solving skills',
+    'Attention to detail and accuracy in record-keeping'
+  ]
+}
+
   ];
 
   const benefits = [
@@ -140,7 +166,7 @@ const Careers = () => {
             </div>
             <div className="text-center p-6">
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <DollarSign className="h-8 w-8 text-green-600" />
+                <IndianRupee  className="h-8 w-8 text-green-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Competitive Pay</h3>
               <p className="text-gray-600">Fair compensation with performance-based incentives</p>
@@ -165,7 +191,7 @@ const Careers = () => {
               Explore exciting career opportunities across different departments
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {jobOpenings.map((job) => (
               <div key={job.id} className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
                 <div className="mb-4">
@@ -182,7 +208,7 @@ const Careers = () => {
                     <span>{job.type} • {job.experience}</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
-                    <DollarSign className="h-4 w-4 mr-2" />
+                    <IndianRupee  className="h-4 w-4 mr-2" />
                     <span>{job.salary}</span>
                   </div>
                 </div>

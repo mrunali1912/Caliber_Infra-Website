@@ -2,76 +2,47 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import CountUp from "react-countup";
 import { Building2, Shield, Truck, Award, ArrowRight, CheckCircle, Star, Phone, Mail, MapPin, Clock, Users, TrendingUp, ChevronLeft, ChevronRight, Package } from 'lucide-react';
+import ProductCard from "../components/ProductCard";
+import products from "../data/products";
 
-const Home = () => {
+
+const Home = ({ cartItems, addToCart }) => {
+  const [cart, setCart] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [showImagePopup, setShowImagePopup] = useState(false);
+    const [addedMessage, setAddedMessage] = useState('');
+  const [quantities, setQuantities] = useState({});
+
+
+ // Add product to global cart
+  const handleAddToCart = (product) => {
+    const quantity = quantities[product.id] ? parseInt(quantities[product.id], 10) : 1;
+    if (quantity < 1 || isNaN(quantity)) return;
+
+    addToCart({ ...product, quantity }); // Use global addToCart
+    setAddedMessage(`${product.name} (${quantity}) added to cart!`);
+    setTimeout(() => setAddedMessage(''), 2000);
+    setQuantities({ ...quantities, [product.id]: 1 });
+  };
+
+    const uniqueCategoryProducts = [];
+  const categoriesAdded = new Set();
+
+  for (const product of products) {
+    if (!categoriesAdded.has(product.category)) {
+      uniqueCategoryProducts.push(product);
+      categoriesAdded.add(product.category);
+    }
+    if (uniqueCategoryProducts.length === 3) break;
+  }
   const images = [
     // "/carousal/carousal1.jpg",
     // "/carousal/carousal2.jpg",
     // "/carousal/carousal3.jpg",
-    "/carousal/carousal7.jpg",
+    "/carousal/carousal10.png",
   ];
-  const products = [
-    {
-      id: 1,
-      category: 'Cement Bricks',
-      name: 'Premium Cement Brick - 4 Inch',
-      size: '4 inch',
-      description: 'High-strength cement bricks ideal for load-bearing walls and structural applications.',
-      price: 8,
-      unit: 'per piece',
-      specifications: {
-        compressiveStrength: '3.5 N/mm²',
-        waterAbsorption: '< 15%',
-        dimensions: '190 x 90 x 90 mm'
-      },
-      images: ['/4-inch-cement-brick.jpg',
-        '/4inch-concrete1.png',
-        '/4-inch-cement-brick.jpg',
-        '/4-inch-cement-brick.jpg'
-      ]
-    },
-    {
-      id: 2,
-      category: 'Cement Bricks',
-      name: 'Premium Cement Brick - 6 Inch',
-      size: '6 inch',
-      description: 'Robust cement bricks perfect for heavy-duty construction and commercial buildings.',
-      price: 12,
-      unit: 'per piece',
-      specifications: {
-        compressiveStrength: '3.5 N/mm²',
-        waterAbsorption: '< 15%',
-        dimensions: '190 x 90 x 140 mm'
-      },
-      images: [
-        '/6-inch-cement-brick1.png',
-        '/6-inch-cement-brick2.png',
-        '/6-inch-cement-brick3.png',
-        '/6-inch-cement-brick4.png',
-      ],
-    },
-    {
-      id: 3,
-      category: 'Cement Bricks',
-      name: 'Premium Cement Brick - 9 Inch',
-      size: '9 inch',
-      description: 'Extra thick cement bricks for maximum strength and thermal insulation.',
-      price: 18,
-      unit: 'per piece',
-      specifications: {
-        compressiveStrength: '3.5 N/mm²',
-        waterAbsorption: '< 15%',
-        dimensions: '190 x 90 x 190 mm'
-      },
-      images: [
-        '/cement-brick-9-inch.webp',
-        '/cement-brick-9-inch.webp',
-        '/cement-brick-9-inch.webp',
-        '/cement-brick-9-inch.webp',
-      ]
-
-    },
-  ];
+ 
 
   const features = [
     {
@@ -175,7 +146,7 @@ const Home = () => {
             <img
               src={img}
               alt={`Slide ${index + 1}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-fit"
             />
             <div className="absolute inset-0 bg-black/20"></div>
           </div>
@@ -216,7 +187,7 @@ const Home = () => {
           <div>
             <h3 className="text-orange-500 text-lg font-semibold mb-3">Welcome To</h3>
             <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
-              Calliber Enterprise Bricks
+              Caliber Enterprise
             </h2>
             <div className="w-20 h-[3px] bg-orange-500 mb-8"></div>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
@@ -226,7 +197,7 @@ const Home = () => {
               sustainability through our products.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed">
-              Our plant spans over 5 acres and is equipped with advanced machinery to
+              Our plant spans over 2 acres and is equipped with advanced machinery to
               ensure precision and quality in every brick. Whether it’s residential,
               commercial, or industrial construction, Calliber Enterprise Bricks stands for
               reliability and excellence.
@@ -260,11 +231,11 @@ const Home = () => {
           {/* Headline */}
           <div className="w-full lg:w-1/2 text-center lg:text-left flex flex-col justify-center items-center lg:items-start space-y-6">
             <span className="text-2xl font-medium text-zinc-700">
-              When it comes to building materials ?
+              When it comes to bricks materials ?
             </span>
             <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-              Best Building <br />
-              Materials{" "}
+              we are Best  <br />
+              Bricks{" "}
               <span className="text-orange-500">
                 Provider in <br />
                 India
@@ -298,14 +269,14 @@ const Home = () => {
             </h2>
             <div className="w-20 h-1 bg-orange-400 mb-4" />
             <p className="text-base text-zinc-100 leading-relaxed max-w-xl">
-              Calliber Enterprise Bricks stands as one of India’s most trusted and innovative brick
-              manufacturers. Recognized for delivering top-quality bricks for home and commercial
+              Caliber Enterprise stands as one of India’s most trusted and innovative brick, paver blocks
+              manufacturers. Recognized for delivering top-quality bricks and paver blocks for home, residential and commercial
               construction, the company is driven by a strong commitment to excellence, modern technology,
-              and complete customer satisfaction. Using advanced production methods, Calliber Enterprise
-              Bricks crafts products that combine durability, strength, and elegant design.<br /><br />
-              Their modern manufacturing facilities and rigorous quality assurance systems ensure every
-              brick meets the highest industry benchmarks. That’s why builders, architects, and homeowners
-              across India choose Calliber Enterprise Bricks for reliable performance and timeless
+              and complete customer satisfaction. Using advanced production methods, Caliber Enterprise
+              crafts products that combine durability, strength, and elegant design.<br /><br />
+              Our modern manufacturing facilities and rigorous quality assurance systems ensure every
+              brick and paver blocks meets the highest industry benchmarks. That’s why builders, architects, and homeowners
+              across India choose Caliber Enterprise Bricks and paver blocks for reliable performance and timeless
               quality.
             </p>
           </div>
@@ -351,7 +322,7 @@ const Home = () => {
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl font-bold text-gray-900">Our Manufacturing Process</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We follow a systematic approach to ensure every brick meets the highest quality standards
+              We follow a systematic approach to ensure every brick and paver block meets the highest quality standards
               and delivers exceptional performance in construction projects.
             </p>
           </div>
@@ -382,70 +353,20 @@ const Home = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product) => (
-              <div
+          {uniqueCategoryProducts.map((product) => {
+            const isInCart = cart.find((item) => item.id === product.id);
+            return (
+              <ProductCard
                 key={product.id}
-                className="bg-gray-50 border border-gray-200 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-              >
-                {/* Image */}
-                <div className="h-64 overflow-hidden bg-gray-100">
-                  <img
-                    src={product.images ? product.images[0] : product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    onClick={() => {
-                      setSelectedProduct(product);
-                      setSelectedImageIndex(0);
-                      setShowImagePopup(true);
-                    }}
-                    onError={(e) => {
-                      e.target.style.display = "none";
-                      e.target.parentElement.innerHTML =
-                        '<div class="w-full h-full flex items-center justify-center text-gray-500">Image not available</div>';
-                    }}
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="p-4 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
-                      {product.category}
-                    </span>
-                    <span className="text-orange-600 font-bold text-base">
-                      ₹{product.price} {product.unit}
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h3>
-                    <p className="text-gray-600 text-xs leading-snug">{product.description}</p>
-                  </div>
-
-                  {/* Specifications with Add to Cart button aligned to last line */}
-                  <div className="flex justify-between mt-2 text-xs text-gray-600">
-                    <div className="space-y-0.5">
-                      <div>Strength: {product.specifications.compressiveStrength}</div>
-                      <div>Water Absorption: {product.specifications.waterAbsorption}</div>
-                      <div>Dimensions: {product.specifications.dimensions}</div>
-                    </div>
-
-                    <button
-                      onClick={() => addToCart(product)}
-                      className={`ml-4 py-2 px-3 rounded-lg font-medium flex items-center justify-center space-x-1 transition-colors self-end ${(product.id)
-                          ? "bg-orange-600 text-white cursor-default"
-                          : "bg-orange-600 text-white hover:bg-orange-700"
-                        }`}
-                    >
-                      <Package className="h-4 w-4" />
-                      <span className="text-sm">
-                        {"Add to Cart"}
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+                product={product}
+                isInCart={isInCart}
+                addToCart={addToCart}
+                setSelectedProduct={setSelectedProduct}
+                setSelectedImageIndex={setSelectedImageIndex}
+                setShowImagePopup={setShowImagePopup}
+              />
+            );
+          })}
           </div>
           {/* Explore More Button */}
           <div className="mt-8 text-center">

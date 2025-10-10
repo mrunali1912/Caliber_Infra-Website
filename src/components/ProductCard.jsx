@@ -1,27 +1,29 @@
-import React, { useState } from "react";
-import { Info, Package } from "lucide-react";
+// src/components/ProductCard.jsx
+import React from "react";
+import { Package } from "lucide-react";
 
-const ProductCard = ({ product, addToCart, onImageClick }) => {
-  const [added, setAdded] = useState(false);
-
-  const handleAddToCart = () => {
-    addToCart(product);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000); // optional revert
-  };
-
+const ProductCard = ({ product, isInCart, addToCart, setSelectedProduct, setSelectedImageIndex, setShowImagePopup }) => {
+  
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+    <div
+      key={product.id}
+      className="bg-gray-50 border border-gray-200 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+    >
       {/* Image */}
-      <div className="h-48 overflow-hidden bg-gray-100">
+      <div className="h-64 overflow-hidden bg-gray-100">
         <img
           src={product.images ? product.images[0] : product.image}
           alt={product.name}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-          onClick={() => onImageClick(product, 0)}
+          onClick={() => {
+            setSelectedProduct(product);
+            setSelectedImageIndex(0);
+            setShowImagePopup(true);
+          }}
           onError={(e) => {
-            e.target.style.display = "none";
-            e.target.parentElement.innerHTML =
+            const target = e.target;
+            target.style.display = "none";
+            target.parentElement.innerHTML =
               '<div class="w-full h-full flex items-center justify-center text-gray-500">Image not available</div>';
           }}
         />
@@ -40,30 +42,29 @@ const ProductCard = ({ product, addToCart, onImageClick }) => {
 
         <div>
           <h3 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h3>
-          <p className="text-gray-600 text-xs leading-tight">{product.description}</p>
+          <p className="text-gray-600 text-xs leading-snug">{product.description}</p>
         </div>
 
-        <div className="space-y-1">
-          <div className="flex items-center space-x-1">
-            <Info className="h-3 w-3 text-orange-600" />
-            <span className="font-medium text-gray-900 text-sm">Specifications:</span>
-          </div>
-          <div className="text-xs text-gray-600 space-y-0.5">
+        {/* Specs + Add to Cart */}
+        <div className="flex justify-between mt-2 text-xs text-gray-600">
+          <div className="space-y-0.5">
             <div>Strength: {product.specifications.compressiveStrength}</div>
             <div>Water Absorption: {product.specifications.waterAbsorption}</div>
             <div>Dimensions: {product.specifications.dimensions}</div>
           </div>
-        </div>
 
-        {/* Add to Cart button inline with price at bottom-left */}
-        <div className="flex justify-start mt-2">
           <button
-            onClick={handleAddToCart}
-            className="bg-orange-600 text-white py-2 px-3 rounded-lg font-medium hover:bg-orange-700 transition-colors flex items-center space-x-1"
-          >
-            <Package className="h-4 w-4" />
-            <span>{added ? "Added" : "Add to Cart"}</span>
-          </button>
+    onClick={() => addToCart(product)}
+    className={`ml-4 py-2 px-3 rounded-lg font-medium flex items-center justify-center space-x-1 transition-colors self-end ${
+      isInCart
+        ? "bg-green-600 text-white cursor-default"
+        : "bg-orange-600 text-white hover:bg-orange-700"
+    }`}
+    disabled={isInCart}
+  >
+    <Package className="h-4 w-4" />
+    <span className="text-sm">{isInCart ? "Added to Cart" : "Add to Cart"}</span>
+  </button>
         </div>
       </div>
     </div>

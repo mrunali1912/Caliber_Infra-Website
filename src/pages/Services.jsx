@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ShoppingCart, Info, Package } from 'lucide-react';
+import ProductCard from '../components/ProductCard';
+import products from '../data/products'
 
 const Products = () => {
   const [cart, setCart] = useState([]);
@@ -18,131 +20,7 @@ const Products = () => {
 
 
 
-  const products = [
-    {
-      id: 1,
-      category: 'Cement Bricks',
-      name: 'Premium Cement Brick - 4 Inch',
-      size: '4 inch',
-      description: 'High-strength cement bricks ideal for load-bearing walls and structural applications.',
-      price: 8,
-      unit: 'per piece',
-      specifications: {
-        compressiveStrength: '3.5 N/mm²',
-        waterAbsorption: '< 15%',
-        dimensions: '190 x 90 x 90 mm'
-      },
-      images: ['/4-inch-cement-brick.jpg',
-        '/4inch-concrete1.png',
-        '/4-inch-cement-brick.jpg',
-        '/4-inch-cement-brick.jpg'
-      ]
-    },
-    {
-      id: 2,
-      category: 'Cement Bricks',
-      name: 'Premium Cement Brick - 6 Inch',
-      size: '6 inch',
-      description: 'Robust cement bricks perfect for heavy-duty construction and commercial buildings.',
-      price: 12,
-      unit: 'per piece',
-      specifications: {
-        compressiveStrength: '3.5 N/mm²',
-        waterAbsorption: '< 15%',
-        dimensions: '190 x 90 x 140 mm'
-      },
-      images: [
-        '/6-inch-cement-brick1.png',
-        '/6-inch-cement-brick2.png',
-        '/6-inch-cement-brick3.png',
-        '/6-inch-cement-brick4.png',
-      ],
-    },
-    {
-      id: 3,
-      category: 'Cement Bricks',
-      name: 'Premium Cement Brick - 9 Inch',
-      size: '9 inch',
-      description: 'Extra thick cement bricks for maximum strength and thermal insulation.',
-      price: 18,
-      unit: 'per piece',
-      specifications: {
-        compressiveStrength: '3.5 N/mm²',
-        waterAbsorption: '< 15%',
-        dimensions: '190 x 90 x 190 mm'
-      },
-      images: [
-        '/cement-brick-9-inch.webp',
-        '/cement-brick-9-inch.webp',
-        '/cement-brick-9-inch.webp',
-        '/cement-brick-9-inch.webp',
-      ]
 
-    },
-    {
-      id: 4,
-      category: 'Flyash Bricks',
-      name: 'Eco-Friendly Flyash Brick - 4 Inch',
-      size: '4 inch',
-      description: 'Environmentally sustainable flyash bricks with excellent thermal properties.',
-      price: 7,
-      unit: 'per piece',
-      specifications: {
-        compressiveStrength: '4.0 N/mm²',
-        waterAbsorption: '< 12%',
-        dimensions: '190 x 90 x 90 mm'
-      },
-      images: [
-        '/fly-ash_brick.jpg',
-        '/fly-ash_brick.jpg',
-        '/fly-ash_brick.jpg',
-        '/fly-ash_brick.jpg'
-      ]
-
-    },
-    {
-      id: 5,
-      category: 'Flyash Bricks',
-      name: 'Eco-Friendly Flyash Brick - 6 Inch',
-      size: '6 inch',
-      description: 'High-performance flyash bricks offering superior strength and eco-friendliness.',
-      price: 11,
-      unit: 'per piece',
-      specifications: {
-        compressiveStrength: '4.0 N/mm²',
-        waterAbsorption: '< 12%',
-        dimensions: '190 x 90 x 140 mm'
-      },
-      images: [
-        '/6-inch-fly-ash-bricks.webp',
-        '/6-inch-fly-ash-bricks.webp',
-        '/6-inch-fly-ash-bricks.webp',
-        '/6-inch-fly-ash-bricks.webp'
-      ]
-
-    },
-    {
-      id: 6,
-      category: 'Paver Blocks',
-      name: 'Decorative Paver Blocks',
-      size: 'Various Designs',
-      description: 'Beautiful and durable paver blocks for driveways, walkways, and landscaping.',
-      price: 25,
-      unit: 'per sq ft',
-      specifications: {
-        compressiveStrength: '40 N/mm²',
-        waterAbsorption: '< 6%',
-        dimensions: 'Multiple sizes available'
-      },
-      images: [
-        '/paver-blocks.webp',
-        '/paver-block1.jpg',
-        '/paver-block2.webp',
-        '/paver-block3.webp'
-      ]
-
-    }
-  ];
 
   const addToCart = (product) => {
     const quantity = quantities[product.id] ? parseInt(quantities[product.id], 10) : 1;
@@ -306,71 +184,16 @@ const Products = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 {filteredProducts.map((product) => {
   const isInCart = cart.find((item) => item.id === product.id);
-
   return (
-    <div
-      key={product.id}
-      className="bg-gray-50 border border-gray-200 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-    >
-      {/* Image */}
-      <div className="h-64 overflow-hidden bg-gray-100">
-        <img
-          src={product.images ? product.images[0] : product.image}
-          alt={product.name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-          onClick={() => {
-            setSelectedProduct(product);
-            setSelectedImageIndex(0);
-            setShowImagePopup(true);
-          }}
-          onError={(e) => {
-            const target = e.target;
-            target.style.display = "none";
-            target.parentElement.innerHTML =
-              '<div class="w-full h-full flex items-center justify-center text-gray-500">Image not available</div>';
-          }}
-        />
-      </div>
-
-      {/* Content */}
-      <div className="p-4 space-y-2">
-        <div className="flex items-center justify-between">
-          <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
-            {product.category}
-          </span>
-          <span className="text-orange-600 font-bold text-base">
-            ₹{product.price} {product.unit}
-          </span>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h3>
-          <p className="text-gray-600 text-xs leading-snug">{product.description}</p>
-        </div>
-
-        {/* Specifications with Add to Cart button aligned to last line */}
-        <div className="flex justify-between mt-2 text-xs text-gray-600">
-          <div className="space-y-0.5">
-            <div>Strength: {product.specifications.compressiveStrength}</div>
-            <div>Water Absorption: {product.specifications.waterAbsorption}</div>
-            <div>Dimensions: {product.specifications.dimensions}</div>
-          </div>
-
-          <button
-            onClick={() => addToCart(product)}
-            className={`ml-4 py-2 px-3 rounded-lg font-medium flex items-center justify-center space-x-1 transition-colors self-end ${
-              isInCart
-                ? "bg-green-600 text-white cursor-default"
-                : "bg-orange-600 text-white hover:bg-orange-700"
-            }`}
-            disabled={isInCart}
-          >
-            <Package className="h-4 w-4" />
-            <span className="text-sm">{isInCart ? "Added to Cart" : "Add to Cart"}</span>
-          </button>
-        </div>
-      </div>
-    </div>
+      <ProductCard
+        key={product.id}
+        product={product}
+        isInCart={isInCart}
+        addToCart={addToCart}
+        setSelectedProduct={setSelectedProduct}
+        setSelectedImageIndex={setSelectedImageIndex}
+        setShowImagePopup={setShowImagePopup}
+      />
   );
 })}
 
