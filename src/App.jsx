@@ -9,6 +9,7 @@ import Contact from './pages/Contact.jsx';
 import Gallery from './pages/Gallery.jsx';
 import Careers from './pages/Careers.jsx';
 import TestReports from './pages/TestReports.jsx';
+import Products from './pages/Services.jsx';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/gallery" element={<Gallery />} />

@@ -50,7 +50,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone',
-      details: ['+91 98765 43210', '+91 87654 32109'],
+      details: ['+91 78752 24017'],
       action: 'Call us for immediate assistance'
     },
     {
@@ -62,7 +62,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Address',
-      details: ['5-Acre Manufacturing Plant', 'Industrial Area, Your City', 'State - 123456'],
+      details: ['2-Acre Manufacturing Plant', 'Industrial Area, Your City', 'State - 123456'],
       action: 'Visit our facility'
     },
     {
@@ -78,7 +78,7 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <h1 className="text-4xl font-bold text-gray-900">Contact Caliber Enterprises</h1>
+          <h1 className="text-4xl font-bold text-gray-900">Contact Caliber Enterprise</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Ready to start your project? Get in touch with our team for expert guidance,
             custom quotes, and premium quality bricks delivered on time.
@@ -128,7 +128,7 @@ const Contact = () => {
                 for personalized service and custom solutions.
               </p>
               <div className="space-y-1 pl-4">
-                <p className="font-semibold">Direct Line: +91 99999 88888</p>
+                <p className="font-semibold">Direct Line: +91  78752 24017</p>
                 <p className="font-semibold">Email: gaurav@gauravinfra.com</p>
               </div>
             </div>
@@ -337,7 +337,7 @@ const Contact = () => {
             <div className="text-center space-y-4">
               <MapPin className="h-16 w-16 text-orange-600 mx-auto" />
               <div>
-                <h3 className="text-xl font-bold text-gray-900">5-Acre Manufacturing Plant</h3>
+                <h3 className="text-xl font-bold text-gray-900">2-Acre Manufacturing Plant</h3>
                 <p className="text-gray-600">Industrial Area, Your City</p>
                 <p className="text-sm text-gray-500 mt-2">Interactive map coming soon</p>
               </div>

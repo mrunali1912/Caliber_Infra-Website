@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ShoppingCart, Info, Package } from 'lucide-react';
 
-const Services = () => {
+const Products = () => {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [addedMessage, setAddedMessage] = useState('');
@@ -10,7 +10,7 @@ const Services = () => {
   const [showImagePopup, setShowImagePopup] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
- 
+
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -248,13 +248,34 @@ const Services = () => {
                           <p className="text-sm text-gray-600">₹{item.price} {item.unit}</p>
                           <div className="flex items-center mt-2">
                             <span className="mr-2 text-sm">Qty:</span>
-                            <input
-                              type="number"
-                              min="1"
-                              value={item.quantity}
-                              onChange={e => updateCartQuantity(item.cartId, Math.max(1, parseInt(e.target.value) || 1))}
-                              className="w-16 px-2 py-1 border border-gray-300 rounded text-sm"
-                            />
+                            <div className="flex items-center space-x-2">
+                              <button
+                                type="button"
+                                onClick={() => updateCartQuantity(item.cartId, Math.max(1, item.quantity - 1))}
+                                className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                              >
+                                -
+                              </button>
+
+                              <input
+                                type="text"
+                                value={item.quantity}
+                                onChange={e => {
+                                  const numericValue = e.target.value.replace(/\D/g, '');
+                                  updateCartQuantity(item.cartId, numericValue === '' ? 1 : parseInt(numericValue, 10));
+                                }}
+                                className="w-16 px-2 py-1 border border-gray-300 rounded text-center text-sm"
+                              />
+
+                              <button
+                                type="button"
+                                onClick={() => updateCartQuantity(item.cartId, item.quantity + 1)}
+                                className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                              >
+                                +
+                              </button>
+                            </div>
+
                           </div>
                         </div>
                         <button
@@ -282,74 +303,79 @@ const Services = () => {
         )}
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
-              <div className="h-64 overflow-hidden bg-gray-100">
-                <img
-                  src={product.images ? product.images[0] : product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  onClick={() => {
-                    setSelectedProduct(product);
-                    setSelectedImageIndex(0);
-                    setShowImagePopup(true);
-                  }}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+{filteredProducts.map((product) => {
+  const isInCart = cart.find((item) => item.id === product.id);
 
-                  onError={(e) => {
-                    const target = e.target;
-                    target.style.display = 'none';
-                    target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-500">Image not available</div>';
-                  }}
-                />
-              </div>
-              <div className="p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                    {product.category}
-                  </span>
-                  <span className="text-orange-600 font-bold text-lg">
-                    ₹{product.price} {product.unit}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{product.description}</p>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <Info className="h-4 w-4 text-orange-600" />
-                    <span className="font-medium text-gray-900">Specifications:</span>
-                  </div>
-                  <div className="text-sm text-gray-600 space-y-1">
-                    <div>Strength: {product.specifications.compressiveStrength}</div>
-                    <div>Water Absorption: {product.specifications.waterAbsorption}</div>
-                    <div>Dimensions: {product.specifications.dimensions}</div>
-                  </div>
-                </div>
-                {/* Quantity Input */}
-                <div className="flex items-center space-x-2 mt-2">
-                  <label htmlFor={`qty-${product.id}`} className="text-sm font-medium">Qty:</label>
-                  <input
-                    id={`qty-${product.id}`}
-                    type="number"
-                    min="1"
-                    value={quantities[product.id] || 0}
-                    onChange={e => setQuantities({ ...quantities, [product.id]: e.target.value })}
-                    className="w-16 px-2 py-1 border border-gray-300 rounded text-sm"
-                  />
-                </div>
-                <button
-                  onClick={() => addToCart(product)}
-                  className="w-full bg-orange-600 text-white py-3 rounded-lg font-medium hover:bg-orange-700 transition-colors flex items-center justify-center space-x-2 mt-2"
-                >
-                  <Package className="h-5 w-5" />
-                  <span>Add to Cart</span>
-                </button>
-              </div>
-            </div>
-          ))}
+  return (
+    <div
+      key={product.id}
+      className="bg-gray-50 border border-gray-200 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+    >
+      {/* Image */}
+      <div className="h-64 overflow-hidden bg-gray-100">
+        <img
+          src={product.images ? product.images[0] : product.image}
+          alt={product.name}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          onClick={() => {
+            setSelectedProduct(product);
+            setSelectedImageIndex(0);
+            setShowImagePopup(true);
+          }}
+          onError={(e) => {
+            const target = e.target;
+            target.style.display = "none";
+            target.parentElement.innerHTML =
+              '<div class="w-full h-full flex items-center justify-center text-gray-500">Image not available</div>';
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="p-4 space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
+            {product.category}
+          </span>
+          <span className="text-orange-600 font-bold text-base">
+            ₹{product.price} {product.unit}
+          </span>
         </div>
+
+        <div>
+          <h3 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h3>
+          <p className="text-gray-600 text-xs leading-snug">{product.description}</p>
+        </div>
+
+        {/* Specifications with Add to Cart button aligned to last line */}
+        <div className="flex justify-between mt-2 text-xs text-gray-600">
+          <div className="space-y-0.5">
+            <div>Strength: {product.specifications.compressiveStrength}</div>
+            <div>Water Absorption: {product.specifications.waterAbsorption}</div>
+            <div>Dimensions: {product.specifications.dimensions}</div>
+          </div>
+
+          <button
+            onClick={() => addToCart(product)}
+            className={`ml-4 py-2 px-3 rounded-lg font-medium flex items-center justify-center space-x-1 transition-colors self-end ${
+              isInCart
+                ? "bg-green-600 text-white cursor-default"
+                : "bg-orange-600 text-white hover:bg-orange-700"
+            }`}
+            disabled={isInCart}
+          >
+            <Package className="h-4 w-4" />
+            <span className="text-sm">{isInCart ? "Added to Cart" : "Add to Cart"}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+})}
+
+</div>
+
 
         {showImagePopup && selectedProduct && (
           <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
@@ -423,4 +449,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Products;

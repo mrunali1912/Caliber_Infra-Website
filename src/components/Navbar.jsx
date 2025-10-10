@@ -22,10 +22,10 @@
 //             <Link to="/" className="flex items-center space-x-2" onClick={() => handleLinkClick()}>
 //               <img
 //                 src="factory-logo.webp"
-//                 alt="Caliber Enterprises Logo"
+//                 alt="Caliber Enterprise Logo"
 //                 className="h-10 w-auto object-contain rounded-md"
 //               />
-//               <span className="text-2xl font-bold text-gray-800">Caliber Enterprises</span>
+//               <span className="text-2xl font-bold text-gray-800">Caliber Enterprise</span>
 //             </Link>
 //           </div>
 
@@ -145,12 +145,12 @@ const Navbar = () => {
               onClick={() => handleLinkClick()}
             >
               <img
-                src="factory-logo.webp"
-                alt="Caliber Enterprises Logo"
-                className="h-10 w-auto object-contain rounded-md"
+                src="founder/Logo/CalliberLogo.jpg"
+                alt="Caliber Enterprise Logo"
+                className="h-10 w-[400] object-fill"
               />
               <span className="text-2xl font-bold text-gray-800">
-                Caliber Enterprises
+                Caliber Enterprise
               </span>
             </Link>
           </div>
@@ -159,7 +159,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-8">
             {[
               { to: "/", label: "Home" },
-              { to: "/services", label: "Services" },
+              { to: "/products", label: "Products" },
               { to: "/about", label: "About Us" },
               { to: "/gallery", label: "Gallery" },
               { to: "/test-reports", label: "Test Reports" },

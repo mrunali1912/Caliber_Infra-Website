@@ -126,14 +126,14 @@ const TestReports = () => {
     }
   };
 
-  const handleDownload = (report) => {
-    const link = document.createElement('a');
-    link.href = report.file;
-    link.download = report.file.split('/').pop();
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  // const handleDownload = (report) => {
+  //   const link = document.createElement('a');
+  //   link.href = report.file;
+  //   link.download = report.file.split('/').pop();
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
 
   return (
     <div className="min-h-screen relative">

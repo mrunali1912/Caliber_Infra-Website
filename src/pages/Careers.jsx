@@ -100,16 +100,16 @@ const Careers = () => {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section
-        className="relative h-[350px] md:h-[450px] flex items-center justify-center bg-center bg-cover"
+        className="relative h-[350px] md:h-[400px] flex items-center justify-center bg-center bg-cover"
         style={{
-          backgroundImage: "url(employee-image2.webp)",
+          backgroundImage: "url(career2.jpg)",
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative z-10 text-center text-white space-y-4">
           <h1 className="text-5xl font-bold drop-shadow-lg">Careers</h1>
           <p className="text-2xl max-w-2xl mx-auto drop-shadow-lg">
-            Join our team and help us build the future. Discover opportunities, culture, and growth at Caliber Enterprises.
+            Join our team and help us build the future. Discover opportunities, culture, and growth at Caliber Enterprise.
           </p>
         </div>
       </section>
@@ -118,7 +118,7 @@ const Careers = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Why Work With Caliber Enterprises?</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Why Work With Caliber Enterprise?</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               We believe our employees are our greatest asset. Join a company that values growth, innovation, and excellence.
             </p>
@@ -357,7 +357,7 @@ const Careers = () => {
                   required
                 />
                 <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
-                  I agree to the terms and conditions and privacy policy. I consent to Caliber Enterprises processing my personal data for recruitment purposes.
+                  I agree to the terms and conditions and privacy policy. I consent to Caliber Enterprise processing my personal data for recruitment purposes.
                 </label>
               </div>
               <div className="flex space-x-4 pt-4">
