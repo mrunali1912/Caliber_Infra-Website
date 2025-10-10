@@ -205,7 +205,7 @@ const Navbar = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
               {[
                 { to: "/", label: "Home" },
-                { to: "/services", label: "Our Products" },
+                { to: "/products", label: "Our Products" },
                 { to: "/about", label: "About Us" },
                 { to: "/gallery", label: "Gallery" },
                 { to: "/test-reports", label: "Test Reports" },
