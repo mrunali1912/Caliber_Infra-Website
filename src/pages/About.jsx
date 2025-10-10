@@ -65,28 +65,32 @@ const About = () => {
           <User className="h-8 w-8 text-orange-600" />
         </div>
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Gaurav Giri</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Gaurav K. Giri</h2>
           <p className="text-xl text-orange-600 font-semibold">Founder & CEO</p>
         </div>
       </div>
 
-      <div className="space-y-4 text-gray-600 leading-relaxed">
-        <p>
-          With a vision to revolutionize the construction materials industry, Gaurav Giri founded 
-          Caliber Enterprise with the mission of providing high-quality, sustainable building materials 
-          to construction professionals across the region.
-        </p>
-        <p>
-          Under his leadership, the company has grown from a small operation to a major player 
-          in the brick manufacturing industry, operating a state-of-the-art 2-acre manufacturing 
-          facility that produces thousands of bricks daily while maintaining the highest quality standards.
-        </p>
-        <p>
-          Gaurav's commitment to innovation, quality, and environmental sustainability has positioned 
-          Caliber Enterprise as a trusted partner for construction projects of all sizes, from residential 
-          homes to large commercial developments.
-        </p>
-      </div>
+   <div className="space-y-4 text-gray-600 leading-relaxed">
+  <p>
+    With a vision to revolutionize the construction materials industry, 
+    Gaurav K. Giri an alumnus of <span className="font-semibold text-gray-900">
+    Royal Holloway, University of London</span>, holding an 
+    <span className="font-semibold text-gray-900"> MSc. in Entrepreneurship & Innovation</span>
+    founded Caliber Enterprise with the mission of providing high-quality, sustainable building materials 
+    to construction professionals across the region.
+  </p>
+  <p>
+    Under his leadership, the company has grown from a small operation to a major player 
+    in the brick manufacturing industry, operating a state-of-the-art 2-acre manufacturing 
+    facility that produces thousands of bricks and paver blocks daily while maintaining the highest quality standards.
+  </p>
+  <p>
+    Gaurav's commitment to innovation, quality, and environmental sustainability has positioned 
+    Caliber Enterprise as a trusted partner for construction projects of all sizes, from residential 
+    homes to large commercial developments.
+  </p>
+</div>
+
 
       <div className="grid grid-cols-3 gap-6 pt-4">
         <div className="text-center">
