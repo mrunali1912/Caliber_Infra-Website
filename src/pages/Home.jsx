@@ -360,7 +360,7 @@ const Home = ({ cartItems, addToCart }) => {
                 key={product.id}
                 product={product}
                 isInCart={isInCart}
-                addToCart={addToCart}
+                addToCart={handleAddToCart}
                 setSelectedProduct={setSelectedProduct}
                 setSelectedImageIndex={setSelectedImageIndex}
                 setShowImagePopup={setShowImagePopup}

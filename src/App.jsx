@@ -13,7 +13,7 @@ import Products from './pages/Services.jsx';
 import { useState } from 'react';
 
 function App() {
-    const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
     setCartItems((prev) => {
@@ -44,19 +44,22 @@ function App() {
   const getTotalPrice = () => {
     return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   };
+
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
         <Navbar
-      cartItems={cartItems}
-      addToCart={addToCart}
-      updateCartQuantity={updateCartQuantity}
-      removeFromCart={removeFromCart}
-       getTotalPrice={() => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)}
-    />
+          cartItems={cartItems}
+          addToCart={addToCart}
+          updateCartQuantity={updateCartQuantity}
+          removeFromCart={removeFromCart}
+          getTotalPrice={() => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)}
+        />
         <Routes>
-          <Route path="/" element={<Home cartItems={cartItems} addToCart={addToCart}/>} />
-          <Route path="/products" element={<Products cartItems={cartItems} addToCart={addToCart} removeFromCart={removeFromCart}/>} />
+          <Route path="/" element={<Home cartItems={cartItems} addToCart={addToCart} />} />
+          <Route path="/products" element={<Products cartItems={cartItems} addToCart={addToCart} removeFromCart={removeFromCart} updateCartQuantity={updateCartQuantity}
+            getTotalPrice={getTotalPrice} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/gallery" element={<Gallery />} />
